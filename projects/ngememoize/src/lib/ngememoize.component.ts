@@ -4,7 +4,13 @@ import { Component } from '@angular/core';
   selector: 'lib-ngememoize',
   standalone: true,
   imports: [],
-  template: ` <p>lib works!</p> `,
-  styles: ``,
+  template: `
+    <p>
+      ngememoize works!
+    </p>
+  `,
+  styles: ``
 })
-export class NgememoizeComponent {}
+export class NgememoizeComponent {
+
+}
