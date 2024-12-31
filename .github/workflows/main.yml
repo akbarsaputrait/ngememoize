@@ -1,7 +1,9 @@
 name: Build and Publish Angular npm Package
 
 on:
-  workflow_dispatch: {}
+  push:
+    branches:
+      - master
 
 permissions:
   contents: read
