@@ -44,6 +44,9 @@ jobs:
       - name: Release
         run: pnpm run semantic-release
         working-directory: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - uses: actions/checkout@v4
       # Setup .npmrc file to publish to npm
