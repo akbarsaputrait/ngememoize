@@ -32,7 +32,7 @@ jobs:
 
       # Install dependencies
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
         working-directory: .
 
       # Build the Angular Library
@@ -46,7 +46,7 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm publish --provenance --access public
+      - run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
