@@ -1,0 +1,58 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # 🎉 Let's get this party started!
+      - name: 🎉 Checkout Repository
+        uses: actions/checkout@v4
+
+      # 🚀 Installing pnpm for package management magic!
+      - name: 🚀 Install pnpm
+        run: |
+          npm install -g pnpm
+          
+      # 🧙‍♂️ Caching pnpm dependencies for faster builds!
+      - name: 🧙‍♂️ Cache pnpm dependencies
+        uses: actions/cache@v3
+        with:
+         path: ~/.pnpm-store
+         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+         restore-keys: |
+           ${{ runner.os }}-pnpm-store-
+
+      # 📦 Installing dependencies like a boss!
+      - name: 📦 Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: .
+
+      # 🛠️ Building the Angular Library with style!
+      - name: 🛠️ Build Angular Library
+        run: pnpm run build:lib
+        working-directory: .
+
+      # 🎊 Time to release the magic!
+      - name: 🎊 Release
+        run: pnpm run semantic-release
+        working-directory: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # 📣 Publishing to GitHub Package Registry - let's go!
+      - name: 📣 Publish to GitHub Packages
+        if: github.repository == 'akbarsaputrait/ngememoize'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npm publish
+        working-directory: ./dist/ngememoize
