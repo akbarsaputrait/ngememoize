@@ -8,7 +8,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:lib": "ng build ngememoize",
-    "travis-deploy-once": "travis-deploy-once --pro",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
@@ -37,7 +36,6 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^18.2.0",
     "semantic-release": "^24.2.0",
-    "travis-deploy-once": "^5.0.11",
     "typescript": "~5.5.2"
   },
   "engines": {

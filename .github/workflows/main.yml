@@ -40,6 +40,11 @@ jobs:
         run: pnpm run build:lib
         working-directory: .
 
+              # Build the Angular Library
+      - name: Release
+        run: pnpm run semantic-release
+        working-directory: .
+
       - uses: actions/checkout@v4
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v4
