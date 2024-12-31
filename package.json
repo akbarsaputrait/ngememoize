@@ -1,14 +1,16 @@
 {
   "name": "ngememoize",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:lib": "ng build ngememoize",
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "semantic-release": "semantic-release"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.0",
     "@angular/common": "^18.2.0",
@@ -34,10 +36,15 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^18.2.0",
+    "semantic-release": "^24.2.0",
+    "travis-deploy-once": "^5.0.11",
     "typescript": "~5.5.2"
   },
   "engines": {
     "pnpm": ">=6.0.0",
     "node": ">=20.15.0"
+  },
+  "release": {
+    "pkgRoot": "dist/ngememoize"
   }
 }

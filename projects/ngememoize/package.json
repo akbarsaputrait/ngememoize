@@ -1,6 +1,6 @@
 {
   "name": "ngememoize",
-  "version": "0.0.1",
+  "version": "0.0.1-semantically-released",
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"
@@ -8,5 +8,19 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akbarsaputrait/ngememoize.git"
+  },
+  "keywords": [
+    "angular",
+    "memoize",
+    "memo"
+  ],
+  "author": "akbarsaputrait",
+  "bugs": {
+    "url": "https://github.com/akbarsaputrait/ngememoize/issues"
+  },
+  "homepage": "https://github.com/akbarsaputrait/ngememoize#readme"
 }
