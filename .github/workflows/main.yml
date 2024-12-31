@@ -17,21 +17,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Setup Node.js environment
-      - name: Setup Node.js Environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'npm'
+      # Install pnpm
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
 
       # Install dependencies
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install
         working-directory: .
 
       # Build the Angular Library
       - name: Build Angular Library
-        run: npm run build:lib
+        run: pnpm run build:lib
         working-directory: .
 
       # Publish the Package to npm Registry
@@ -47,4 +45,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm publish
-        working-directory: ./angular-workspace/ngememoize/dist/ngememoize
+        working-directory: ./dist/ngememoize
