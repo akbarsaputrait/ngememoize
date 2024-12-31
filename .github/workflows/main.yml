@@ -21,6 +21,14 @@ jobs:
       - name: Install pnpm
         run: |
           npm install -g pnpm
+          
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v3
+        with:
+         path: ~/.pnpm-store
+         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+         restore-keys: |
+           ${{ runner.os }}-pnpm-store-
 
       # Install dependencies
       - name: Install Dependencies
@@ -32,12 +40,16 @@ jobs:
         run: pnpm run build:lib
         working-directory: .
 
-      # Publish the Package to npm Registry
-      - name: Publish to npm
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish --provenance --access public
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
-        working-directory: ./dist/ngememoize
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # Publish to GitHub Package Registry
       - name: Publish to GitHub Packages
