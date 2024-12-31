@@ -40,48 +40,49 @@ pnpm add ngememoize
 ```typescript
 import { Ngememoize } from 'ngememoize';
 
-  // Method example
-  @Memoize<[number], number>({
-    debugLabel: 'processData'
-  })
-  processData(value: number): number {
-    console.log('Processing...');
-    return value * 2;
-  }
+// Method example
+@Memoize<[number], number>({
+  debugLabel: 'processData'
+})
+processData(value: number): number {
+  console.log('Processing...');
+  return value * 2;
+}
 
-  // Getter example
-  @Memoize<never, number>({
-    debugLabel: 'computedValue'
-  })
-  get computedValue(): number {
-    console.log('Computing...');
-    return this.data.reduce((sum, val) => sum + val, 0);
-  }
+// Getter example
+@Memoize<never, number>({
+  debugLabel: 'computedValue'
+})
+get computedValue(): number {
+  console.log('Computing...');
+  return this.data.reduce((sum, val) => sum + val, 0);
+}
 
-  // Dependent getter example
-  @MemoizeWithDeps<never, number>(
-    function(this: ExampleComponent) {
-      return [this.data, this.multiplier];
-    },
-    { debugLabel: 'dependentValue' }
-  )
-  get dependentValue(): number {
-    console.log('Computing dependent...');
-    return this.computedValue * this.multiplier;
-  }
+// Dependent getter example
+@MemoizeWithDeps<never, number>(
+  function(this: ExampleComponent) {
+    return [this.data, this.multiplier];
+  },
+  { debugLabel: 'dependentValue' }
+)
+get dependentValue(): number {
+  console.log('Computing dependent...');
+  return this.computedValue * this.multiplier;
+}
 
-  // Async method example
-  @Memoize<[string], Promise<string>>({
-    debugLabel: 'fetchData',
-    maxAge: 5000
-  })
-  async fetchData(id: string): Promise<string> {
-    console.log('Fetching...');
-    return new Promise(resolve => 
-      setTimeout(() => resolve(`Data for ${id}`), 1000)
-    );
-  }
+// Async method example
+@Memoize<[string], Promise<string>>({
+  debugLabel: 'fetchData',
+  maxAge: 5000
+})
+async fetchData(id: string): Promise<string> {
+  console.log('Fetching...');
+  return new Promise(resolve => 
+    setTimeout(() => resolve(`Data for ${id}`), 1000)
+  );
+}
 ```
+For more examples on how to use Ngememoize, please refer to the `/projects/example` directory.
 
 ---
 

@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
       maxAge: 30000,
       maxSize: 100,
       keyGenerator: (...args: any[]) => {
-        console.log(args);
         const filteredArgs = args.filter(
           (arg) => arg !== null && arg !== undefined
         );

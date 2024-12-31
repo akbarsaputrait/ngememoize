@@ -48,11 +48,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # Publish to GitHub Package Registry
-      - name: Publish to GitHub Packages
-        if: github.repository == 'akbarsaputrait/ngememoize'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npm publish
-        working-directory: ./dist/ngememoize
