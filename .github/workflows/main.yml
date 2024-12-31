@@ -43,6 +43,6 @@ jobs:
       - name: Publish to GitHub Packages
         if: github.repository == 'akbarsaputrait/ngememoize'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npm publish
         working-directory: ./angular-workspace/ngememoize/dist/ngememoize
