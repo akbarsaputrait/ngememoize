@@ -55,8 +55,29 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1>Hello, {{ lib.hello() }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
+      <div class="content">
+        <div class="left-side">
+          <input
+            type="text"
+            placeholder="Search users..."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange($event)"
+          />
+          <ul>
+            @for (user of adminUsersList; track $index) {
+            <li>
+              {{ user.id }} - {{ user.firstName }}
+              <!-- Display user name and email -->
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="divider" role="separator" aria-label="Divider"></div>
+        <div class="right-side">
+          <!-- Other content -->
+        </div>
+      </div>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

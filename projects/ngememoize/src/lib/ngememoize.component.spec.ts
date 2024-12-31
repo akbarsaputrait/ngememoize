@@ -8,8 +8,9 @@ describe('NgememoizeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgememoizeComponent],
-    }).compileComponents();
+      imports: [NgememoizeComponent]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(NgememoizeComponent);
     component = fixture.componentInstance;
