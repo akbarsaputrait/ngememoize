@@ -43,6 +43,10 @@
     "node": ">=20.15.0"
   },
   "release": {
-    "pkgRoot": "dist/ngememoize"
+    "pkgRoot": "dist/ngememoize",
+    "branches": [
+      "master",
+      "next"
+    ]
   }
 }
