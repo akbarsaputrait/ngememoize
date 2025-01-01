@@ -32,6 +32,9 @@ importers:
       '@angular/router':
         specifier: ^18.2.0
         version: 18.2.13(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.13(@angular/animations@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
+      ngememoize:
+        specifier: ^1.1.0
+        version: 1.1.0(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       object-hash:
         specifier: ^3.0.0
         version: 3.0.0
@@ -4103,6 +4106,12 @@ packages:
     peerDependenciesMeta:
       tailwindcss:
         optional: true
+
+  ngememoize@1.1.0:
+    resolution: {integrity: sha512-+SXVdw0lA1v+kHqCSJDnahwG028k2b/9yGic22sLFpPdlZavaNsIMYxlfi2NLSJk+1dOz9OZlt+HiCo2M2vjDA==}
+    peerDependencies:
+      '@angular/common': ^18.2.0
+      '@angular/core': ^18.2.0
 
   nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
@@ -9873,6 +9882,12 @@ snapshots:
     optionalDependencies:
       rollup: 4.29.1
       tailwindcss: 3.4.17
+
+  ngememoize@1.1.0(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)):
+    dependencies:
+      '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+      tslib: 2.8.1
 
   nice-napi@1.0.2:
     dependencies:
