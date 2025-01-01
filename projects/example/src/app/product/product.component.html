@@ -1,0 +1,81 @@
+<div class="w-full">
+  <h2 class="text-md font-bold text-neutral-100">
+    Example (Product Price Calculator)
+  </h2>
+  <p class="text-neutral-400 mb-4 text-sm">Open your console.log 👀</p>
+
+  <div class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium mb-1 text-neutral-200"
+        >Base Price ($)</label
+      >
+      <input
+        type="number"
+        [(ngModel)]="product.basePrice"
+        class="border rounded px-3 py-2 w-full"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1 text-neutral-200"
+        >Quantity</label
+      >
+      <input
+        type="number"
+        [(ngModel)]="product.quantity"
+        class="border rounded px-3 py-2 w-full"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1 text-neutral-200"
+        >Discount Code</label
+      >
+      <select
+        [(ngModel)]="product.discountCode"
+        class="border rounded px-3 py-2 w-full"
+      >
+        <option value="">No discount</option>
+        <option value="SAVE10">SAVE10 (10% off)</option>
+        <option value="SAVE20">SAVE20 (20% off)</option>
+        <option value="BULK15">BULK15 (15% off 5+ items)</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1 text-neutral-200"
+        >Shipping Method</label
+      >
+      <select
+        [(ngModel)]="product.shipping"
+        class="border rounded px-3 py-2 w-full"
+      >
+        <option value="standard">Standard (Free)</option>
+        <option value="express">Express ($15)</option>
+        <option value="overnight">Overnight ($25)</option>
+      </select>
+    </div>
+
+    <button
+      (click)="calculateTotal()"
+      class="w-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 px-4 py-2 rounded"
+    >
+      Calculate Total
+    </button>
+
+    <div class="mt-4 p-4 bg-gray-100 rounded space-y-2">
+      <p>Subtotal: ${{ subtotal.toFixed(2) }}</p>
+      <p>Discount: ${{ discount.toFixed(2) }}</p>
+      <p>Shipping: ${{ shippingCost.toFixed(2) }}</p>
+      <p class="text-lg font-bold">Total: ${{ total.toFixed(2) }}</p>
+    </div>
+
+    <a
+      href="https://github.com/akbarsaputrait/ngememoize/tree/master/projects/example/app/product"
+      class="text-sm text-neutral-400 hover:underline space-y-2"
+      target="_blank"
+    >
+      See the code
+    </a>
+  </div>
+</div>
