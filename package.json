@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "ngememoize": "^1.1.0",
     "object-hash": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -44,9 +45,9 @@
     "typescript": "~5.5.2"
   },
   "engines": {
-    "pnpm": ">=6.0.0",
-    "node": ">=20.15.0"
+    "node": ">=22.12.0"
   },
+  "packageManager": "pnpm@9.15.2",
   "workspaces": [
     "projects/*"
   ],
