@@ -1,26 +1,16 @@
 import { NgememoizeService } from './ngememoize.service';
-import {
-  defaultKeyGenerator,
-  defaultEquals,
-  isPromise,
-  createDependencyKey,
-} from './ngememoize.util';
+import { defaultEquals, isPromise, createDependencyKey } from './utils/general';
 import {
   MemoizeOptions,
   KeyGeneratorFunction,
   EqualityComparator,
   DependencyArray,
+  NgememoizeProps,
 } from './types';
-
-export type NgememoizeProps<TArgs extends any[], TResult> = {
-  context: any;
-  fn: (...args: TArgs) => TResult;
-  cacheIdentifier: string;
-  args: TArgs;
-  options: MemoizeOptions<TArgs, TResult>;
-  keyGenerator?: KeyGeneratorFunction<TArgs>;
-  equals?: EqualityComparator<TResult>;
-};
+import {
+  createOptimizedKeyGenerator,
+  defaultKeyGenerator,
+} from './utils/key-generator';
 
 function memoizeFunction<TArgs extends any[], TResult>({
   context,
@@ -30,6 +20,8 @@ function memoizeFunction<TArgs extends any[], TResult>({
   options,
   keyGenerator = defaultKeyGenerator,
   equals = defaultEquals,
+  onCacheHit,
+  onCacheMiss,
 }: NgememoizeProps<TArgs, TResult>): TResult {
   // Get the service from context or create a new instance
   let memoizeService: NgememoizeService;
@@ -41,7 +33,8 @@ function memoizeFunction<TArgs extends any[], TResult>({
   }
 
   const cache = memoizeService.getCache<TResult>(cacheIdentifier);
-  const key = keyGenerator(...args);
+  const key = createOptimizedKeyGenerator<TArgs>(...args);
+  const generatedKey = keyGenerator(...args);
   const now = Date.now();
   const cached = cache.get(key);
   const cacheStatus = cached ? 'hit' : 'miss';
@@ -56,13 +49,22 @@ function memoizeFunction<TArgs extends any[], TResult>({
     if (options.maxAge && now - cached.timestamp > options.maxAge) {
       cache.delete(key);
       memoizeService.recordCacheMiss(cacheIdentifier);
+      if (onCacheMiss) {
+        onCacheMiss(generatedKey);
+      }
     } else {
       memoizeService.recordCacheHit(cacheIdentifier);
+      if (onCacheHit) {
+        onCacheHit(generatedKey);
+      }
       return cached.value;
     }
   }
 
   memoizeService.recordCacheMiss(cacheIdentifier);
+  if (onCacheMiss) {
+    onCacheMiss(generatedKey);
+  }
 
   if (options.maxSize && cache.size >= options.maxSize) {
     const oldestKey = Array.from(cache.entries()).sort(
@@ -79,14 +81,18 @@ function memoizeFunction<TArgs extends any[], TResult>({
         (Array.isArray(resolvedResult) && resolvedResult.length > 0) ||
         resolvedResult
       ) {
-        cache.set(key, { value: result, timestamp: now });
+        cache.set(key, { value: result, timestamp: now, generatedKey });
       }
       return resolvedResult;
     }) as TResult;
   }
 
   if ((Array.isArray(result) && result.length > 0) || result) {
-    cache.set(key, { value: result, timestamp: now });
+    cache.set(key, { value: result, timestamp: now, generatedKey });
+  }
+
+  if (onCacheMiss) {
+    onCacheMiss(generatedKey);
   }
 
   return result;
@@ -124,6 +130,8 @@ export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
           options,
           keyGenerator,
           equals,
+          onCacheHit: options.onCacheHit,
+          onCacheMiss: options.onCacheMiss,
         });
       } as any;
     } else if (descriptor.get) {
@@ -137,6 +145,8 @@ export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
           options,
           keyGenerator,
           equals,
+          onCacheHit: options.onCacheHit,
+          onCacheMiss: options.onCacheMiss,
         });
       };
     }

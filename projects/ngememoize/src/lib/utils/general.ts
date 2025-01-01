@@ -1,10 +1,4 @@
-import { CacheEntry, DependencyArray, MemoizeKey } from './types';
-
-export function defaultKeyGenerator<TArgs extends any[]>(
-  ...args: TArgs
-): string {
-  return JSON.stringify(args).trim().replace(/ /g, '');
-}
+import { CacheEntry, DependencyArray, MemoizeKey } from '../types';
 
 export function defaultEquals<T>(prev: T, next: T): boolean {
   return JSON.stringify(prev) === JSON.stringify(next);

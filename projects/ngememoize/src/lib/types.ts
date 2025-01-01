@@ -15,11 +15,14 @@ export interface MemoizeOptions<TArgs extends any[] = any[], TResult = any> {
   keyGenerator?: KeyGeneratorFunction<TArgs>;
   equals?: EqualityComparator<TResult>;
   debugLabel?: string;
+  onCacheMiss?: (key: MemoizeKey) => void;
+  onCacheHit?: (key: MemoizeKey) => void;
 }
 
 export interface CacheEntry<T> {
   value: T;
   timestamp: number;
+  generatedKey?: string;
   dependencies?: DependencyArray;
 }
 
@@ -31,3 +34,15 @@ export interface CacheStats {
   hitRate: number;
   missRate: number;
 }
+
+export type NgememoizeProps<TArgs extends any[], TResult> = {
+  context: any;
+  fn: (...args: TArgs) => TResult;
+  cacheIdentifier: string;
+  args: TArgs;
+  options: MemoizeOptions<TArgs, TResult>;
+  keyGenerator?: KeyGeneratorFunction<TArgs>;
+  equals?: EqualityComparator<TResult>;
+  onCacheMiss?: (key: MemoizeKey) => void;
+  onCacheHit?: (key: MemoizeKey) => void;
+};
