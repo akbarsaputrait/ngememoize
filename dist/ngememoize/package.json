@@ -1,6 +1,6 @@
 {
   "name": "ngememoize",
-  "version": "0.0.1-semantically-released",
+  "version": "1.5.0-testing.5",
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0"
@@ -24,5 +24,18 @@
   "bugs": {
     "url": "https://github.com/akbarsaputrait/ngememoize/issues"
   },
-  "homepage": "https://ngememoize.vercel.app/"
+  "homepage": "https://ngememoize.vercel.app/",
+  "module": "fesm2022/ngememoize.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/ngememoize.mjs",
+      "esm": "./esm2022/ngememoize.mjs",
+      "default": "./fesm2022/ngememoize.mjs"
+    }
+  }
 }

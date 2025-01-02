@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Ngememoize, NgememoizeService } from 'ngememoize';
 import { ProductComponent } from './product/product.component';
 
 @Component({

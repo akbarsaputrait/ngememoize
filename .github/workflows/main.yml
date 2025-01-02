@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+      - beta
+      - testing
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,15 +24,15 @@ jobs:
       - name: 🚀 Install pnpm
         run: |
           npm install -g pnpm
-          
+
       # 🧙‍♂️ Caching pnpm dependencies for faster builds!
       - name: 🧙‍♂️ Cache pnpm dependencies
         uses: actions/cache@v3
         with:
-         path: ~/.pnpm-store
-         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-         restore-keys: |
-           ${{ runner.os }}-pnpm-store-
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       # 📦 Installing dependencies like a boss!
       - name: 📦 Install Dependencies
@@ -43,8 +46,20 @@ jobs:
 
       # 🎊 Time to release the magic!
       - name: 🎊 Release
-        run: pnpm run semantic-release
+        run: |
+          echo "Running semantic-release for branch ${{ github.ref_name }}..."
+          pnpm run semantic-release
         working-directory: .
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  notify:
+    runs-on: ubuntu-24.04
+    needs: publish
+    steps:
+      # 🔔 Notify Build Status
+      - name: 🔔 Notify Build Status
+        run: |
+          echo "Build and Publish workflow completed for branch ${{ github.ref_name }}."
+          echo "Check the logs for more details."

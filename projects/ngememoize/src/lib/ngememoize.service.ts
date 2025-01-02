@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CacheMap, CacheStats } from './types';
 
+/**
+ * Service for managing memoization caches.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class NgememoizeService {
-  constructor() {}
-
-  hello() {
-    return 'Hello from NgememoizeService';
-  }
-
   private caches: Map<string, CacheMap<any>> = new Map();
   private stats: Map<string, { hits: number; misses: number }> = new Map();
 
+  /**
+   * Retrieves the cache associated with the given identifier.
+   * @param identifier - The unique identifier for the cache.
+   * @returns The cache map associated with the identifier.
+   */
   getCache<T>(identifier: string): CacheMap<T> {
     if (!this.caches.has(identifier)) {
       this.caches.set(identifier, new Map());
@@ -22,6 +24,10 @@ export class NgememoizeService {
     return this.caches.get(identifier) as CacheMap<T>;
   }
 
+  /**
+   * Clears the cache for the given identifier or all caches if no identifier is provided.
+   * @param identifier - The unique identifier for the cache to clear.
+   */
   clearCache(identifier?: string): void {
     if (identifier) {
       this.caches.delete(identifier);
@@ -32,6 +38,10 @@ export class NgememoizeService {
     }
   }
 
+  /**
+   * Records a cache hit for the given identifier.
+   * @param identifier - The unique identifier for the cache.
+   */
   recordCacheHit(identifier: string): void {
     const stats = this.stats.get(identifier);
     if (stats) {
@@ -39,6 +49,10 @@ export class NgememoizeService {
     }
   }
 
+  /**
+   * Records a cache miss for the given identifier.
+   * @param identifier - The unique identifier for the cache.
+   */
   recordCacheMiss(identifier: string): void {
     const stats = this.stats.get(identifier);
     if (stats) {
@@ -46,6 +60,10 @@ export class NgememoizeService {
     }
   }
 
+  /**
+   * Retrieves statistics about all caches.
+   * @returns An object containing cache statistics.
+   */
   getCacheStats(): Record<string, CacheStats> {
     const stats: Record<string, CacheStats> = {};
 
@@ -56,7 +74,7 @@ export class NgememoizeService {
 
       stats[key] = {
         size: cache.size,
-        lastAccessed: Math.max(...entries.map((e) => e.timestamp)),
+        lastAccessed: Math.max(...entries.map(e => e.timestamp)),
         hitRate: total ? cacheStats.hits / total : 0,
         missRate: total ? cacheStats.misses / total : 0,
       };
@@ -65,6 +83,10 @@ export class NgememoizeService {
     return stats;
   }
 
+  /**
+   * Retrieves all caches.
+   * @returns An object containing all cache maps.
+   */
   getAllCache(): Record<string, CacheMap<any>> {
     const allCaches: Record<string, CacheMap<any>> = {};
     this.caches.forEach((cache, key) => {

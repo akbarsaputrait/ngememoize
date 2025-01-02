@@ -10,7 +10,6 @@
     "noImplicitReturns": true,
     "paths": {
       "ngememoize": [
-        "./dist/ngememoize",
         "./dist/ngememoize"
       ]
     },
