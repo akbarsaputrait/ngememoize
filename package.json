@@ -9,7 +9,8 @@
     "test": "ng test",
     "build:lib": "ng build ngememoize",
     "semantic-release": "semantic-release",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular-eslint/schematics": "18.3.0",
@@ -54,7 +55,8 @@
     "prettier": "^3.4.2",
     "prettier-eslint": "^16.3.0",
     "semantic-release": "^24.2.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "husky": "^8.0.0"
   },
   "engines": {
     "node": ">=22.12.0"
