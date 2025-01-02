@@ -45,8 +45,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       ngememoize:
-        specifier: ^1.5.0-testing.2
-        version: 1.5.0-testing.2(@angular/cli@18.2.12(chokidar@3.6.0))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
+        specifier: ^1.5.0-testing.3
+        version: 1.5.0-testing.3(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
       object-has:
         specifier: ^1.0.2
         version: 1.0.2
@@ -148,11 +148,11 @@ importers:
   projects/ngememoize:
     dependencies:
       '@angular/common':
-        specifier: ^18.2.0
-        version: 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+        specifier: ^19.0.0
+        version: 19.0.5(@angular/core@19.0.5(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core':
-        specifier: ^18.2.0
-        version: 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
+        specifier: ^19.0.0
+        version: 19.0.5(rxjs@7.8.1)(zone.js@0.14.10)
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -318,6 +318,13 @@ packages:
       '@angular/core': 18.2.13
       rxjs: ^6.5.3 || ^7.4.0
 
+  '@angular/common@19.0.5':
+    resolution: {integrity: sha512-fFK+euCj1AjBHBCpj9VnduMSeqoMRhZZHbhPYiND7tucRRJ8vwGU0sYK2KI/Ko+fsrNIXL/0O4F36jVPl09Smg==}
+    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
+    peerDependencies:
+      '@angular/core': 19.0.5
+      rxjs: ^6.5.3 || ^7.4.0
+
   '@angular/compiler-cli@18.2.13':
     resolution: {integrity: sha512-DBSh4AQwkiJDSiVvJATRmjxf6wyUs9pwQLgaFdSlfuTRO+sdb0J2z1r3BYm8t0IqdoyXzdZq2YCH43EmyvD71g==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
@@ -341,6 +348,13 @@ packages:
     peerDependencies:
       rxjs: ^6.5.3 || ^7.4.0
       zone.js: ~0.14.10
+
+  '@angular/core@19.0.5':
+    resolution: {integrity: sha512-Ywc6sPO6G/Y1stfk3y/MallV/h0yzQ0vdOHRWueLrk5kD1DTdbolV4X03Cs3PuVvravgcSVE3nnuuHFuH32emQ==}
+    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
+    peerDependencies:
+      rxjs: ^6.5.3 || ^7.4.0
+      zone.js: ~0.15.0
 
   '@angular/forms@18.2.13':
     resolution: {integrity: sha512-A67D867fu3DSBhdLWWZl/F5pr7v2+dRM2u3U7ZJ0ewh4a+sv+0yqWdJW+a8xIoiHxS+btGEJL2qAKJiH+MCFfg==}
@@ -4652,12 +4666,11 @@ packages:
       tailwindcss:
         optional: true
 
-  ngememoize@1.5.0-testing.2:
-    resolution: {integrity: sha512-H3aMO2ONb4FCkZZkuP+AkeVVWHilyqTOitUCxERzZuJbirLWKkrYfX+3wIdFmONQXRFI98GNeFH6JV2kXd5JDA==}
+  ngememoize@1.5.0-testing.3:
+    resolution: {integrity: sha512-evGesuk6NHhr0k/9zQEEXEFXmAaqwy1Xh65dF57Nl4z4k5meY1CHEqAh1ikMGkWar2nye17uQvI0NYX/GOY77w==}
     peerDependencies:
-      '@angular/cli': ^18.0.0 || ^19.0.0
-      '@angular/common': ^18.0.0 || ^19.0.0
-      '@angular/core': ^18.0.0 || ^19.0.0
+      '@angular/common': ^18.2.0
+      '@angular/core': ^18.2.0
 
   nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
@@ -6580,6 +6593,12 @@ snapshots:
       rxjs: 7.8.1
       tslib: 2.8.1
 
+  '@angular/common@19.0.5(@angular/core@19.0.5(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/core': 19.0.5(rxjs@7.8.1)(zone.js@0.14.10)
+      rxjs: 7.8.1
+      tslib: 2.8.1
+
   '@angular/compiler-cli@18.2.13(@angular/compiler@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.5.4)':
     dependencies:
       '@angular/compiler': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))
@@ -6602,6 +6621,12 @@ snapshots:
       '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
 
   '@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)':
+    dependencies:
+      rxjs: 7.8.1
+      tslib: 2.8.1
+      zone.js: 0.14.10
+
+  '@angular/core@19.0.5(rxjs@7.8.1)(zone.js@0.14.10)':
     dependencies:
       rxjs: 7.8.1
       tslib: 2.8.1
@@ -11170,12 +11195,10 @@ snapshots:
       rollup: 4.29.1
       tailwindcss: 3.4.17
 
-  ngememoize@1.5.0-testing.2(@angular/cli@18.2.12(chokidar@3.6.0))(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)):
+  ngememoize@1.5.0-testing.3(@angular/common@18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10)):
     dependencies:
-      '@angular/cli': 18.2.12(chokidar@3.6.0)
       '@angular/common': 18.2.13(@angular/core@18.2.13(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 18.2.13(rxjs@7.8.1)(zone.js@0.14.10)
-      object-hash: 3.0.0
       tslib: 2.8.1
 
   nice-napi@1.0.2:

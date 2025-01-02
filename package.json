@@ -28,7 +28,7 @@
     "@eslint/js": "^9.17.0",
     "globals": "^15.14.0",
     "hash-it": "^6.0.0",
-    "ngememoize": "^1.5.0-testing.2",
+    "ngememoize": "^1.5.0-testing.3",
     "object-has": "^1.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
