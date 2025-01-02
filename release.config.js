@@ -15,9 +15,15 @@ module.exports = {
       '@semantic-release/npm',
       {
         npmPublish: true,
-        tarballDir: 'dist/ngememoize',
+        pkgRoot: 'dist/ngememoize',
       },
     ],
     '@semantic-release/github',
+    [
+      '@semantic-release/git',
+      {
+        assets: ['dist/ngememoize/*'],
+      },
+    ],
   ],
 };
