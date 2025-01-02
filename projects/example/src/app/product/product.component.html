@@ -12,8 +12,7 @@
       <input
         type="number"
         [(ngModel)]="product.basePrice"
-        class="border rounded px-3 py-2 w-full"
-      />
+        class="border rounded px-3 py-2 w-full" />
     </div>
 
     <div>
@@ -23,8 +22,7 @@
       <input
         type="number"
         [(ngModel)]="product.quantity"
-        class="border rounded px-3 py-2 w-full"
-      />
+        class="border rounded px-3 py-2 w-full" />
     </div>
 
     <div>
@@ -33,8 +31,7 @@
       >
       <select
         [(ngModel)]="product.discountCode"
-        class="border rounded px-3 py-2 w-full"
-      >
+        class="border rounded px-3 py-2 w-full">
         <option value="">No discount</option>
         <option value="SAVE10">SAVE10 (10% off)</option>
         <option value="SAVE20">SAVE20 (20% off)</option>
@@ -48,8 +45,7 @@
       >
       <select
         [(ngModel)]="product.shipping"
-        class="border rounded px-3 py-2 w-full"
-      >
+        class="border rounded px-3 py-2 w-full">
         <option value="standard">Standard (Free)</option>
         <option value="express">Express ($15)</option>
         <option value="overnight">Overnight ($25)</option>
@@ -58,8 +54,7 @@
 
     <button
       (click)="calculateTotal()"
-      class="w-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 px-4 py-2 rounded"
-    >
+      class="w-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 px-4 py-2 rounded">
       Calculate Total
     </button>
 
@@ -73,8 +68,7 @@
     <a
       href="https://github.com/akbarsaputrait/ngememoize/tree/master/projects/example/src/app/product"
       class="text-sm text-neutral-400 hover:underline space-y-2"
-      target="_blank"
-    >
+      target="_blank">
       See the code
     </a>
   </div>
