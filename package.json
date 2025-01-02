@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "build": "ng build",
-    "build:lib": "ng build ngememoize",
+    "build:lib": "ng build ngememoize --configuration production",
     "lint": "ng lint",
     "ng": "./node_modules/.bin/ng",
     "prepare": "husky install",

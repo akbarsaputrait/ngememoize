@@ -3,9 +3,18 @@
 {
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
-    "declarationMap": false
+    "declarationMap": false,
+    "declaration": true
   },
   "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "strictInjectionParameters": true,
     "compilationMode": "partial"
-  }
+  },
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
+  ]
 }

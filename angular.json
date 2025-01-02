@@ -35,7 +35,7 @@
               "projects/example/src/styles.scss"
             ],
             "allowedCommonJsDependencies": [
-              "object-hash"
+              "hash-it"
             ]
           },
           "configurations": {
@@ -117,8 +117,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngememoize/ng-package.json",
-            "tsConfig": "projects/ngememoize/tsconfig.lib.json"
+            "project": "projects/ngememoize/ng-package.json"
           },
           "configurations": {
             "production": {
