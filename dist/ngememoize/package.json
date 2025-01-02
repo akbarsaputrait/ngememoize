@@ -1,9 +1,9 @@
 {
   "name": "ngememoize",
-  "version": "1.5.0-testing.3",
+  "version": "1.5.0-testing.4",
   "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
