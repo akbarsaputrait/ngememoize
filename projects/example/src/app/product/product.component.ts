@@ -37,22 +37,22 @@ export class ProductComponent {
 
     this.subtotal = this.calculateSubtotal(
       this.product.basePrice,
-      this.product.quantity
+      this.product.quantity,
     );
     this.discount = this.calculateDiscount(
       this.subtotal,
       this.product.discountCode ?? '',
-      this.product.quantity
+      this.product.quantity,
     );
     this.shippingCost = this.calculateShipping(
       this.product.shipping ?? '',
-      this.subtotal
+      this.subtotal,
     );
     this.total = this.subtotal - this.discount + this.shippingCost;
 
     const endTime = performance.now();
     console.log(
-      `⏱️ Total calculation time: ${(endTime - startTime).toFixed(2)}ms`
+      `⏱️ Total calculation time: ${(endTime - startTime).toFixed(2)}ms`,
     );
 
     console.log('Ngememoize Caches:', this.memoizeService.getAllCache());
@@ -68,7 +68,7 @@ export class ProductComponent {
   })
   calculateSubtotal(price: number, quantity: number): number {
     console.log(
-      `💰 Computing subtotal for price: $${price} × ${quantity} items`
+      `💰 Computing subtotal for price: $${price} × ${quantity} items`,
     );
     // Simulate complex calculation
     return Number((price * quantity).toFixed(2));
@@ -84,7 +84,7 @@ export class ProductComponent {
   })
   calculateDiscount(subtotal: number, code: string, quantity: number): number {
     console.log(
-      `🏷️ Computing discount for subtotal: $${subtotal}, code: ${code}, quantity: ${quantity}`
+      `🏷️ Computing discount for subtotal: $${subtotal}, code: ${code}, quantity: ${quantity}`,
     );
 
     if (!code) return 0;
@@ -111,7 +111,7 @@ export class ProductComponent {
   })
   calculateShipping(method: string, subtotal: number): number {
     console.log(
-      `📦 Computing shipping for method: ${method}, subtotal: $${subtotal}`
+      `📦 Computing shipping for method: ${method}, subtotal: $${subtotal}`,
     );
 
     switch (method) {
