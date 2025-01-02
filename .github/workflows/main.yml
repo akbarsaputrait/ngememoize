@@ -46,7 +46,9 @@ jobs:
 
       # 🎊 Time to release the magic!
       - name: 🎊 Release
-        run: pnpm run semantic-release
+        run: |
+          echo "Running semantic-release for branch ${{ github.ref_name }}..."
+          pnpm run semantic-release
         working-directory: .
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

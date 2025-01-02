@@ -15,9 +15,6 @@
     "test": "ng test",
     "watch": "ng build --watch --configuration development"
   },
-  "release": {
-    "pkgRoot": "dist/ngememoize"
-  },
   "dependencies": {
     "@angular-eslint/schematics": "18.3.0",
     "@angular/animations": "^18.2.0",
@@ -40,6 +37,7 @@
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
     "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
     "@semantic-release/npm": "^12.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/object-hash": "^3.0.6",

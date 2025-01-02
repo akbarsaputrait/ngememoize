@@ -3,21 +3,21 @@
  */
 module.exports = {
   branches: [
-    "master",
-    { name: "beta", prerelease: true },
-    { name: "testing", prerelease: true },
+    'master',
+    { name: 'beta', prerelease: true },
+    { name: 'testing', prerelease: true },
   ],
-  repositoryUrl: "https://github.com/akbarsaputrait/ngememoize",
+  repositoryUrl: 'https://github.com/akbarsaputrait/ngememoize',
   plugins: [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
+    '@semantic-release/commit-analyzer',
+    '@semantic-release/release-notes-generator',
     [
-      "@semantic-release/npm",
+      '@semantic-release/npm',
       {
         npmPublish: true,
-        tarballDir: "dist/ngememoize",
+        tarballDir: 'dist/ngememoize',
       },
     ],
-    "@semantic-release/github",
+    '@semantic-release/github',
   ],
 };
