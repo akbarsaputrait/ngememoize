@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  Ngememoize,
-  NgememoizeService,
-} from '../../../../ngememoize/src/public-api';
+import { Ngememoize, NgememoizeService } from 'ngememoize';
 
 interface Product {
   basePrice: number;
