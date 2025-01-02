@@ -1,6 +1,6 @@
 {
   "name": "ngememoize",
-  "version": "0.0.0-watch+1735838015918",
+  "version": "1.5.0-testing.4",
   "peerDependencies": {
     "@angular/common": "^19.0.0",
     "@angular/core": "^19.0.0"
