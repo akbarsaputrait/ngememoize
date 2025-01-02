@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Ngememoize, NgememoizeService } from 'ngememoize';
+import {
+  Ngememoize,
+  NgememoizeService,
+} from '../../../../ngememoize/src/public-api';
 
 interface Product {
   basePrice: number;
@@ -59,8 +62,7 @@ export class ProductComponent {
   }
 
   @Ngememoize({
-    // maxAge: 30000, // Cache for 30 seconds
-    // debugLabel: 'subtotal',
+    maxAge: 5000, // Cache for 5 seconds
     onCacheHit: key =>
       console.log(`🎯 Cache HIT: Subtotal calculation for ${key as string}`),
     onCacheMiss: key =>
@@ -75,8 +77,6 @@ export class ProductComponent {
   }
 
   @Ngememoize({
-    // maxAge: 30000,
-    // debugLabel: 'discount',
     onCacheHit: key =>
       console.log(`🎯 Cache HIT: Discount calculation for ${key as string}`),
     onCacheMiss: key =>
@@ -102,8 +102,6 @@ export class ProductComponent {
   }
 
   @Ngememoize({
-    // maxAge: 30000,
-    // debugLabel: 'shipping',
     onCacheHit: key =>
       console.log(`🎯 Cache HIT: Shipping calculation for ${key as string}`),
     onCacheMiss: key =>

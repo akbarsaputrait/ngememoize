@@ -3,8 +3,5 @@
   "dest": "../../dist/ngememoize",
   "lib": {
     "entryFile": "src/public-api.ts"
-  },
-  "allowedNonPeerDependencies": [
-    "object-hash"
-  ]
+  }
 }

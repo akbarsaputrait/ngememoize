@@ -5,6 +5,7 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "declaration": true,
+    "emitDeclarationOnly": true,
     "declarationMap": true,
     "inlineSources": true,
     "types": []

@@ -1,17 +1,24 @@
 import { NgememoizeService } from './ngememoize.service';
 import { defaultEquals, isPromise, createDependencyKey } from './utils/general';
-import {
-  MemoizeOptions,
-  KeyGeneratorFunction,
-  EqualityComparator,
-  DependencyArray,
-  NgememoizeProps,
-} from './types';
+import { MemoizeOptions, DependencyArray, NgememoizeProps } from './types';
 import {
   createOptimizedKeyGenerator,
   defaultKeyGenerator,
 } from './utils/key-generator';
 
+/**
+ * Memoizes a function, caching its results based on the provided arguments.
+ * @param context - The context in which the function is called.
+ * @param fn - The function to be memoized.
+ * @param cacheIdentifier - A unique identifier for the cache.
+ * @param args - The arguments to be passed to the function.
+ * @param options - Options for memoization, including cache settings and callbacks.
+ * @param keyGenerator - A function to generate a unique key for the cache.
+ * @param equals - A function to compare cached values for equality.
+ * @param onCacheHit - Callback invoked when a cache hit occurs.
+ * @param onCacheMiss - Callback invoked when a cache miss occurs.
+ * @returns The result of the memoized function.
+ */
 function memoizeFunction<TArgs extends any[], TResult>({
   context,
   fn,
@@ -48,12 +55,20 @@ function memoizeFunction<TArgs extends any[], TResult>({
   if (cached) {
     if (options.maxAge && now - cached.timestamp > options.maxAge) {
       cache.delete(key);
+
+      if (options.debugLabel) {
+        console.debug(
+          `[Memoize: ${options.debugLabel}] Delete Cache for key: ${key}`
+        );
+      }
+
       memoizeService.recordCacheMiss(cacheIdentifier);
       if (onCacheMiss) {
         onCacheMiss(generatedKey);
       }
     } else {
       memoizeService.recordCacheHit(cacheIdentifier);
+
       if (onCacheHit) {
         onCacheHit(generatedKey);
       }
@@ -76,7 +91,7 @@ function memoizeFunction<TArgs extends any[], TResult>({
   const result = fn.apply(context, args);
 
   if (isPromise(result)) {
-    return result.then((resolvedResult) => {
+    return result.then(resolvedResult => {
       if (
         (Array.isArray(resolvedResult) && resolvedResult.length > 0) ||
         resolvedResult
@@ -98,6 +113,11 @@ function memoizeFunction<TArgs extends any[], TResult>({
   return result;
 }
 
+/**
+ * Decorator that memoizes the result of a method.
+ * @param options - Options for memoization, including cache settings and callbacks.
+ * @returns A method decorator.
+ */
 export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
   options: MemoizeOptions<TArgs, TResult> = {}
 ) {
@@ -120,7 +140,7 @@ export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
       const originalMethod = descriptor.value as (...args: TArgs) => TResult; // Cast to the correct type
       descriptor.value = function (this: any, ...args: TArgs): TResult {
         const filteredArgs = args.filter(
-          (arg) => arg !== null && arg !== undefined
+          arg => arg !== null && arg !== undefined
         ) as TArgs;
         return memoizeFunction<TArgs, TResult>({
           context: this,
@@ -155,6 +175,12 @@ export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
   };
 }
 
+/**
+ * Decorator that memoizes the result of a method with dependencies.
+ * @param dependencies - A function that returns the dependencies for the memoization.
+ * @param options - Options for memoization, including cache settings and callbacks.
+ * @returns A method decorator.
+ */
 export function NgememoizeWithDeps<TArgs extends any[] = any[], TResult = any>(
   dependencies: () => DependencyArray,
   options: MemoizeOptions<[...TArgs, string] | [string], TResult> = {}
@@ -175,7 +201,7 @@ export function NgememoizeWithDeps<TArgs extends any[] = any[], TResult = any>(
         const deps = dependencies.call(this);
         const depsKey = createDependencyKey(deps);
         const filteredArgs = args.filter(
-          (arg) => arg !== null && arg !== undefined
+          arg => arg !== null && arg !== undefined
         ) as TArgs;
 
         return memoizeFunction<[...TArgs, string], TResult>({
@@ -202,7 +228,7 @@ export function NgememoizeWithDeps<TArgs extends any[] = any[], TResult = any>(
           cacheIdentifier,
           args: [depsKey],
           options,
-          keyGenerator: (depsKey) => depsKey,
+          keyGenerator: depsKey => depsKey,
           equals,
         });
       };
