@@ -153,6 +153,9 @@ importers:
       '@angular/core':
         specifier: ^19.0.0
         version: 19.0.5(rxjs@7.8.1)(zone.js@0.14.10)
+      hash-it:
+        specifier: ^2.0.0
+        version: 2.1.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -3780,6 +3783,9 @@ packages:
   has-tostringtag@1.0.2:
     resolution: {integrity: sha512-NqADB8VjPFLM2V0VvHUewwwsw0ZWBaIdgo+ieHtK3hasLz4qeCRjYcqfB6AQrBggRKppKF8L52/VqdVsO47Dlw==}
     engines: {node: '>= 0.4'}
+
+  hash-it@2.1.2:
+    resolution: {integrity: sha512-SE7zsvHYuLVJ6wLrZcbrpdwhElXWv7E0DIX3eX7klNX1fQOT8VfzyrA5FoS10/PQf36M7kFMreDtdS1t8MbNnQ==}
 
   hash-it@6.0.0:
     resolution: {integrity: sha512-KHzmSFx1KwyMPw0kXeeUD752q/Kfbzhy6dAZrjXV9kAIXGqzGvv8vhkUqj+2MGZldTo0IBpw6v7iWE7uxsvH0w==}
@@ -10290,6 +10296,8 @@ snapshots:
   has-tostringtag@1.0.2:
     dependencies:
       has-symbols: 1.1.0
+
+  hash-it@2.1.2: {}
 
   hash-it@6.0.0: {}
 
