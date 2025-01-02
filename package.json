@@ -1,16 +1,22 @@
 {
   "name": "ngememoize",
   "version": "0.0.2",
+  "workspaces": [
+    "projects/*"
+  ],
   "scripts": {
-    "ng": "./node_modules/.bin/ng",
-    "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "build:lib": "ng build ngememoize",
-    "semantic-release": "semantic-release",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "ng": "./node_modules/.bin/ng",
+    "prepare": "husky install",
+    "semantic-release": "semantic-release",
+    "start": "ng serve",
+    "test": "ng test",
+    "watch": "ng build --watch --configuration development"
+  },
+  "release": {
+    "pkgRoot": "dist/ngememoize"
   },
   "dependencies": {
     "@angular-eslint/schematics": "18.3.0",
@@ -42,8 +48,7 @@
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "typescript": "5.6.3",
-    "typescript-eslint": "8.15.0",
+    "husky": "^8.0.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -56,16 +61,11 @@
     "prettier-eslint": "^16.3.0",
     "semantic-release": "^24.2.0",
     "tailwindcss": "^3.4.17",
-    "husky": "^8.0.0"
-  },
-  "engines": {
-    "node": ">=22.12.0"
+    "typescript": "~5.5.4",
+    "typescript-eslint": "8.15.0"
   },
   "packageManager": "pnpm@9.15.2",
-  "workspaces": [
-    "projects/*"
-  ],
-  "release": {
-    "pkgRoot": "dist/ngememoize"
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
