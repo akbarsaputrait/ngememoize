@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+      - beta
+      - testing
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -42,9 +45,34 @@ jobs:
         working-directory: .
 
       # 🎊 Time to release the magic!
-      - name: 🎊 Release
-        run: pnpm run semantic-release
-        working-directory: .
+      - name: 🎊 Execute Branch-Specific Commands
+        run: |
+          if [ "${{ github.ref_name }}" == "master" ]; then
+            echo "Running production release for master branch..."
+            pnpm run semantic-release
+          elif [ "${{ github.ref_name }}" == "beta" ]; then
+            echo "Running beta release for beta branch..."
+            pnpm version prerelease --preid=beta
+            pnpm publish --tag beta --access public
+          elif [ "${{ github.ref_name }}" == "testing" ]; then
+            echo "Running testing release for testing branch..."
+            pnpm version prerelease --preid=rc
+            pnpm publish --tag rc --access public
+          else
+            echo "Branch not configured for release: ${{ github.ref_name }}"
+            exit 1
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          CI: true
+  
+  notify:
+    runs-on: ubuntu-24.04
+    needs: publish
+    steps:
+      # 🔔 Notify Build Status
+      - name: 🔔 Notify Build Status
+        run: |
+          echo "Build and Publish workflow completed for branch ${{ github.ref_name }}."
+          echo "Check the logs for more details."

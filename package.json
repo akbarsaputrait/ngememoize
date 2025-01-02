@@ -20,7 +20,6 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "ngememoize": "^1.1.0",
-    "object-hash": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -29,6 +28,8 @@
     "@angular-devkit/build-angular": "^18.2.12",
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^12.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/object-hash": "^3.0.6",
     "autoprefixer": "^10.4.20",
@@ -52,10 +53,6 @@
     "projects/*"
   ],
   "release": {
-    "pkgRoot": "dist/ngememoize",
-    "branches": [
-      "master",
-      "next"
-    ]
+    "pkgRoot": "dist/ngememoize"
   }
 }
