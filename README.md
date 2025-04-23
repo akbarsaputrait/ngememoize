@@ -6,10 +6,9 @@ Easily boost the performance of your Angular applications by memoizing functions
 ## ✨ Features
 
 - **Memoize Functions**: Cache function results for improved performance.
-- **Memoize Getters**: Optimize computed properties with caching.
 - **Lightweight**: Designed for efficiency without adding unnecessary overhead.
 - **Decorator Support**: Memoization is as simple as adding a decorator.
-- **Angular Compatible**: Fully supports Angular 18 and later.
+- **Angular Compatible**: Fully supports Angular 19 and later.
 - **Tree Shakable**: Only include what you need.
 
 ---
@@ -34,14 +33,13 @@ pnpm add ngememoize
 
 ## 🚀 Quick Start
 
-
 ### Memoize a Function
 
 ```typescript
 import { Ngememoize } from 'ngememoize';
 
 // Method example
-@Memoize<[number], number>({
+@Ngememoize({
   debugLabel: 'processData'
 })
 processData(value: number): number {
@@ -49,39 +47,19 @@ processData(value: number): number {
   return value * 2;
 }
 
-// Getter example
-@Memoize<never, number>({
-  debugLabel: 'computedValue'
-})
-get computedValue(): number {
-  console.log('Computing...');
-  return this.data.reduce((sum, val) => sum + val, 0);
-}
-
-// Dependent getter example
-@MemoizeWithDeps<never, number>(
-  function(this: ExampleComponent) {
-    return [this.data, this.multiplier];
-  },
-  { debugLabel: 'dependentValue' }
-)
-get dependentValue(): number {
-  console.log('Computing dependent...');
-  return this.computedValue * this.multiplier;
-}
-
 // Async method example
-@Memoize<[string], Promise<string>>({
+@Ngememoize({
   debugLabel: 'fetchData',
   maxAge: 5000
 })
 async fetchData(id: string): Promise<string> {
   console.log('Fetching...');
-  return new Promise(resolve => 
+  return new Promise(resolve =>
     setTimeout(() => resolve(`Data for ${id}`), 1000)
   );
 }
 ```
+
 For more examples on how to use Ngememoize, please refer to the `/projects/example` directory.
 
 ---
@@ -100,7 +78,7 @@ npm test
 
 ### Memoization Decorator
 
-- **@memoize**: Use this decorator on functions or getters to enable memoization.
+- **@Ngememoize**: Use this decorator on functions or getters to enable memoization.
 
 ### Cache Behavior
 
@@ -146,8 +124,6 @@ If you find this library helpful, consider giving it a ⭐ on [GitHub](https://g
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/akbarsaputrait)
 
-
 ---
 
 Now go forth and **memoize** your way to blazing-fast Angular apps! 🚀
-
