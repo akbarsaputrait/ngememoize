@@ -6,10 +6,9 @@ Easily boost the performance of your Angular applications by memoizing functions
 ## ✨ Features
 
 - **Memoize Functions**: Cache function results for improved performance.
-- **Memoize Getters**: Optimize computed properties with caching.
 - **Lightweight**: Designed for efficiency without adding unnecessary overhead.
 - **Decorator Support**: Memoization is as simple as adding a decorator.
-- **Angular Compatible**: Fully supports Angular 18 and later.
+- **Angular Compatible**: Fully supports Angular 19 and later.
 - **Tree Shakable**: Only include what you need.
 
 ---
