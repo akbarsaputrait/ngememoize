@@ -26,7 +26,6 @@ function memoizeFunction<TArgs extends any[], TResult>({
   args,
   options,
   keyGenerator = defaultKeyGenerator,
-  equals = defaultEquals,
   onCacheHit,
   onCacheMiss,
 }: NgememoizeProps<TArgs, TResult>): TResult {
@@ -48,7 +47,7 @@ function memoizeFunction<TArgs extends any[], TResult>({
 
   if (options.debugLabel) {
     console.debug(
-      `[Memoize: ${options.debugLabel}] Cache ${cacheStatus} for key: ${key}`
+      `[Memoize: ${options.debugLabel}] Cache ${cacheStatus} for key: ${key}`,
     );
   }
 
@@ -58,7 +57,7 @@ function memoizeFunction<TArgs extends any[], TResult>({
 
       if (options.debugLabel) {
         console.debug(
-          `[Memoize: ${options.debugLabel}] Delete Cache for key: ${key}`
+          `[Memoize: ${options.debugLabel}] Delete Cache for key: ${key}`,
         );
       }
 
@@ -83,7 +82,7 @@ function memoizeFunction<TArgs extends any[], TResult>({
 
   if (options.maxSize && cache.size >= options.maxSize) {
     const oldestKey = Array.from(cache.entries()).sort(
-      ([, a], [, b]) => a.timestamp - b.timestamp
+      ([, a], [, b]) => a.timestamp - b.timestamp,
     )[0][0];
     cache.delete(oldestKey);
   }
@@ -119,16 +118,16 @@ function memoizeFunction<TArgs extends any[], TResult>({
  * @returns A method decorator.
  */
 export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
-  options: MemoizeOptions<TArgs, TResult> = {}
+  options: MemoizeOptions<TArgs, TResult> = {},
 ) {
   return function (
     target: any,
     propertyKey: string,
-    descriptor: TypedPropertyDescriptor<TResult>
+    descriptor: TypedPropertyDescriptor<TResult>,
   ) {
     if (!descriptor.value && !descriptor.get) {
       throw new Error(
-        'Memoize decorator can only be applied to methods or getters'
+        'Memoize decorator can only be applied to methods or getters',
       );
     }
 
@@ -140,7 +139,7 @@ export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
       const originalMethod = descriptor.value as (...args: TArgs) => TResult; // Cast to the correct type
       descriptor.value = function (this: any, ...args: TArgs): TResult {
         const filteredArgs = args.filter(
-          arg => arg !== null && arg !== undefined
+          arg => arg !== null && arg !== undefined,
         ) as TArgs;
         return memoizeFunction<TArgs, TResult>({
           context: this,
@@ -167,69 +166,6 @@ export function Ngememoize<TArgs extends any[] = any[], TResult = any>(
           equals,
           onCacheHit: options.onCacheHit,
           onCacheMiss: options.onCacheMiss,
-        });
-      };
-    }
-
-    return descriptor;
-  };
-}
-
-/**
- * Decorator that memoizes the result of a method with dependencies.
- * @param dependencies - A function that returns the dependencies for the memoization.
- * @param options - Options for memoization, including cache settings and callbacks.
- * @returns A method decorator.
- */
-export function NgememoizeWithDeps<TArgs extends any[] = any[], TResult = any>(
-  dependencies: () => DependencyArray,
-  options: MemoizeOptions<[...TArgs, string] | [string], TResult> = {}
-) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: TypedPropertyDescriptor<TResult>
-  ) {
-    const cacheIdentifier = `${target.constructor.name}_${propertyKey}`;
-    const keyGenerator = options.keyGenerator || defaultKeyGenerator;
-    const equals = options.equals || defaultEquals;
-
-    if (descriptor.value) {
-      // Handle methods
-      const originalMethod = descriptor.value as (...args: TArgs) => TResult;
-      descriptor.value = function (this: any, ...args: TArgs): TResult {
-        const deps = dependencies.call(this);
-        const depsKey = createDependencyKey(deps);
-        const filteredArgs = args.filter(
-          arg => arg !== null && arg !== undefined
-        ) as TArgs;
-
-        return memoizeFunction<[...TArgs, string], TResult>({
-          context: this,
-          fn: (...allArgs: [...TArgs, string]) =>
-            originalMethod.apply(this, allArgs.slice(0, -1) as TArgs),
-          cacheIdentifier,
-          args: [...filteredArgs, depsKey],
-          options,
-          keyGenerator,
-          equals,
-        });
-      } as any;
-    } else if (descriptor.get) {
-      // Handle getters
-      const originalGetter = descriptor.get;
-      descriptor.get = function (this: any): TResult {
-        const deps = dependencies.call(this);
-        const depsKey = createDependencyKey(deps);
-
-        return memoizeFunction<[string], TResult>({
-          context: this,
-          fn: () => originalGetter.call(this),
-          cacheIdentifier,
-          args: [depsKey],
-          options,
-          keyGenerator: depsKey => depsKey,
-          equals,
         });
       };
     }

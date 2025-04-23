@@ -63,6 +63,7 @@ export class ProductComponent {
 
   @Ngememoize({
     maxAge: 5000, // Cache for 5 seconds
+    keyGenerator: (price, quantity) => `subtotal-${price}-${quantity}`,
     onCacheHit: key =>
       console.log(`🎯 Cache HIT: Subtotal calculation for ${key as string}`),
     onCacheMiss: key =>
