@@ -17,7 +17,6 @@ module.exports = {
         npmPublish: true,
         pkgRoot: 'dist/ngememoize',
       },
-    ],
-    '@semantic-release/github',
+    ]
   ],
 };
